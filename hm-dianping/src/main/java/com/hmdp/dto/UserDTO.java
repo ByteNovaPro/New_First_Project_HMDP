@@ -1,0 +1,14 @@
+package com.hmdp.dto;
+
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class UserDTO implements Serializable {
+    private Long id;
+    private String nickName;
+    private String icon;
+    private String token;
+    private String phone;
+}
