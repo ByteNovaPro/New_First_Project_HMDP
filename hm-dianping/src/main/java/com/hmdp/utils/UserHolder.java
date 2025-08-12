@@ -1,7 +1,6 @@
 package com.hmdp.utils;
 
-import com.hmdp.dto.UserDTO;
-import org.springframework.stereotype.Component;
+import com.hmdp.utils.dto.UserDTO;
 
 
 public class UserHolder {

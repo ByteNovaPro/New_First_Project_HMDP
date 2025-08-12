@@ -1,6 +1,6 @@
 package com.hmdp.Interceptor;
 
-import com.hmdp.dto.UserDTO;
+import com.hmdp.utils.dto.UserDTO;
 import com.hmdp.utils.UserHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +44,10 @@ public class TokenReflashInterceptor implements HandlerInterceptor {
         userDTO.setNickName((String)userDTOMap.get("nickName"));
         userDTO.setToken(LOGIN_USER_KEY+token);
         userDTO.setPhone((String)userDTOMap.get("phone"));
-        userDTO.setId((Long)(userDTOMap.get("id")));
-
+        userDTO.setId(Long.valueOf(userDTOMap.get("id").toString()));
         if(UserHolder.getUser() == null){
-            System.out.println("UserHolder.getUser():::::::::::::::::::::"+UserHolder.getUser());
-            System.out.println("userDTO是空的！！！！！！！！！！！！！！！！！！！！！！！！！:::::::::::::::::::::::::");
             UserHolder.saveUser(userDTO);
         }
-        System.out.println("UserHolder.getUser():::::::::::::::::::::"+UserHolder.getUser());
         //5.放行
         return true;
     }
