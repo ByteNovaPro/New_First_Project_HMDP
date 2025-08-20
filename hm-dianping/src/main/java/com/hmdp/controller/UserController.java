@@ -97,8 +97,6 @@ public class UserController {
         //4.校验验证码是否正确
         //4.1获取redis中的code
         String redis_code = redisTemplate.opsForValue().get(LOGIN_CODE_KEY+loginForm.getPhone());
-        System.out.println("redis_code::::::::::::::::::"+redis_code);
-        System.out.println("loginForm.getCode()"+loginForm.getCode());
         if(!Objects.equals(redis_code, loginForm.getCode())){
             return Result.fail("验证码错误");
         }
@@ -106,7 +104,6 @@ public class UserController {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("phone", loginForm.getPhone());
         User user = userService.getOne(queryWrapper); // 调用 getOne 方法
-
         String token = UUID.randomUUID().toString();
 
         if(user == null){
@@ -114,7 +111,6 @@ public class UserController {
         }
         //7.将用户信息保存在redis中
         //todo 会重复在redis中创建user，待优化！！！！！！！！！也不对，下线之后应该要清除掉缓存中的user…… 可以往下继续开发了……嘿嘿……
-
         Map<String,Object> userMap = new HashMap<>();
         userMap.put("phone",loginForm.getPhone());
         userMap.put("nickName",user.getNickName());

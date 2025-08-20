@@ -28,12 +28,11 @@ class HmDianPingApplicationTests {
     shopService.saveShopToRedis(1L, 1L);
 }
 
-    private ExecutorService es = Executors.newFixedThreadPool(500);
+    private static final ExecutorService es = Executors.newFixedThreadPool(500);
     @Test
     void testIdWorker() throws InterruptedException {
         //多线程处理问题例子，可以写到简历咯
         CountDownLatch latch = new CountDownLatch(300);
-
         Runnable task = () -> {
             for (int i = 0; i < 100; i++) {
                 long id = redisIdWorker.nextId("order");
@@ -45,11 +44,11 @@ class HmDianPingApplicationTests {
         for (int i = 0; i < 300; i++) {
             es.submit(task);
         }
+        //等待所有工作线程执行完毕，再继续执行主线程
         latch.await();
         long end = System.currentTimeMillis();
         //30000次循环 time ≈ 1秒
         System.out.println("time = " + (end - begin));
-
     }
 
     @Test

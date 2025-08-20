@@ -1,5 +1,3 @@
-server:
-  port: 8081
 spring:
   application:
     name: hmdp
@@ -9,7 +7,7 @@ spring:
     username: root
     password: 123456
   redis:
-    host: 192.168.61.130
+    host: 192.168.61.132
     port: 6379
     password: 123456
     lettuce:

@@ -31,10 +31,10 @@ public class TokenReflashInterceptor implements HandlerInterceptor {
         }
         //3.查询token是否在redis中能够查询得到 ，需要用户重新登陆
         if((redisTemplate.opsForHash().entries(LOGIN_USER_KEY+token)).isEmpty()){
-            log.info("token已经过期，请用户重新登录");
+            log.info("token已经过期或失效，请用户重新登录");
             return true;
         }
-        //4.如果能查询的到，就刷新token，将token保存到threadLocal中
+        //4.如果能查询的到且token未过期，就刷新token，将token保存到threadLocal中
         //刷新token
         redisTemplate.expire(LOGIN_USER_KEY+token, Duration.ofHours(24));
         //将token保存到threadLocal中

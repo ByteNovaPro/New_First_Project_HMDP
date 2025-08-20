@@ -24,8 +24,8 @@ public class VoucherOrderController {
     @Autowired
     IVoucherOrderService iVoucherOrderService;
     @PostMapping("seckill/{id}")
-    public Result seckillVoucher(@PathVariable("id") Long voucherId) {
-
+    public Result seckillVoucher(@PathVariable("id") Long voucherId) throws InterruptedException {
+        //todo 直接把视频里面测试的优化结果写在简历上面就好了
         return iVoucherOrderService.seckillVoucher(voucherId);
     }
 }

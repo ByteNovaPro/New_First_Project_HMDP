@@ -2,6 +2,7 @@ package com.hmdp.service;
 
 import com.hmdp.entity.Blog;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hmdp.utils.dto.Result;
 
 /**
  * <p>
@@ -13,4 +14,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IBlogService extends IService<Blog> {
 
+    Result queryBlogById(Long id);
+
+    Result queryHotBlog(Integer current);
+
+    Result blogLike(Long id);
+
+    Result queryBlogLikes(Long id);
 }
